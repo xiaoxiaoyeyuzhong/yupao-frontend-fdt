@@ -4,6 +4,7 @@ import App from './App.vue'
 // import { Button, NavBar ,Icon,Tabbar, TabbarItem} from 'vant';
 import Vant from 'vant';
 import 'vant/lib/index.css';
+import 'vant/es/toast/style';
 
 
 import routes from './config/routes.ts';

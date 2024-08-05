@@ -22,6 +22,8 @@ declare namespace API{
 
         tags: string[];
 
+        profile: string;
+
         planetCode: string;
     };
 }

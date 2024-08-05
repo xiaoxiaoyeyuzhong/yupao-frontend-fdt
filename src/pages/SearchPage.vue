@@ -1,6 +1,6 @@
 <script setup>
 import {ref} from 'vue';
-
+import {useRouter} from "vue-router";
 const searchText = ref('');
 
 // TreeSelect 分类选择
@@ -66,7 +66,18 @@ const doClose = (tag) => {
     return item !== tag;
   })
 }
-
+const router=useRouter();
+// 搜索用户列表函数
+const doSearchUserList = () =>{
+  router.push({
+    path:'/UserPage/SearchResultPage',
+    query:{
+      // 跳转的时候才为tags赋值
+      tags:activeIds.value
+    }
+      }
+  )
+}
 </script>
 
 <template>
@@ -102,6 +113,7 @@ const doClose = (tag) => {
       v-model:main-active-index="activeIndex"
       :items="tagList"
   />
+  <van-button type="primary" size="large" round="round" @click="doSearchUserList()">搜索</van-button>
 </template>
 
 <style scoped>
