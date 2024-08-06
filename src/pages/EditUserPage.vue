@@ -2,7 +2,11 @@
 
 import {useRoute} from "vue-router";
 import {ref} from "vue";
+import {getCurrentUser, updateUser} from "../services/user.ts";
+import {showFailToast, showSuccessToast, UploaderFileListItem} from "vant/es";
+import {useRouter} from "vue-router";
 
+const router = useRouter();
 const route = useRoute();
 const editUser = ref({
   editKey: route.query.editKey as string,
@@ -13,9 +17,26 @@ const imagesUrl = ref([
       {url: editUser.value.currentValue}
     ]
 )
-const onSubmit = () => {
-  console.log('submit', editUser.value.editKey, ":", editUser.value.currentValue);
-//  todo 把editKey、editName、currentValue传递到后端
+console.log("未改变之前，imagesUrl=",imagesUrl.value);
+const onSubmit = async () => {
+  const currentUser = await getCurrentUser();
+  if (!currentUser.data) {
+    showFailToast("用户未登录")
+    return;
+  }
+
+  const updateData = {
+    'id': currentUser.data.id,
+    [editUser.value.editKey as string]: editUser.value.currentValue,
+  }
+  const res = await updateUser(updateData);
+  console.log("改变之后，imagesUrl=",imagesUrl.value);
+  if (res.code === 0) {
+    showSuccessToast("用户信息更新成功")
+  } else {
+    showFailToast("用户信息更新失败")
+  }
+  await router.push('/UserPage')
 };
 </script>
 
