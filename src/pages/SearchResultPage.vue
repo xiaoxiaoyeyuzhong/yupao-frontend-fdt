@@ -4,6 +4,7 @@ import {onMounted, ref} from "vue";
 import myAxios from "../plugins/myAxios.ts"
 import { showSuccessToast, showFailToast } from 'vant';
 import qs from 'qs';
+import UserCardList from "../components/UserCardList.vue";
 const route =useRoute();
 console.log(route.query.tags)
 const {tags} = route.query;
@@ -28,7 +29,7 @@ const mockUser={
 
   planetCode: "123",
 }
-const userList =ref([mockUser]);
+const userList : API.CurrentUser[]=ref([mockUser]);
 onMounted(async ()=>{
   const userListData=await myAxios({
     method: 'get',
@@ -44,7 +45,8 @@ onMounted(async ()=>{
     .then(function (response){
         console.log("/user/search/tags success",response);
         showSuccessToast('搜索成功');
-        return response.data?.data;
+        // myAxios配置已经取了axios的data，这里只需要取后端封装的data
+        return response.data;
   })
       .catch(function (error){
         console.log("/user/search/tags error",error);
@@ -66,19 +68,7 @@ onMounted(async ()=>{
 </script>
 
 <template>
-  <van-card
-      v-for="user in userList"
-      :desc="user.profile"
-      :title="`姓名:${user.username} 星球编号:${user.planetCode}`"
-      :thumb="user.avatarUrl"
-  >
-    <template #tags>
-      <van-tag plain type="primary" v-for="tag in user.tags">{{ tag }}</van-tag>
-    </template>
-    <template #footer>
-      <van-button size="mini">联系我</van-button>
-    </template>
-  </van-card>
+  <user-card-list :user-list="userList" />
 </template>
 
 <style scoped>
