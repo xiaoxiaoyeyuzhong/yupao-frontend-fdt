@@ -39,7 +39,7 @@ onMounted(async ()=>{
   console.log(res);
   if(res.code === 0){
     user.value=res.data;
-    // showSuccessToast("获取用户信息成功")
+    showSuccessToast("获取用户信息成功")
   }else{
     user.value=null;
     showFailToast("获取用户信息失败")
@@ -61,18 +61,10 @@ const doEdit = (editKey: string,editName: string|number,currentValue: string|und
 
 <template>
   <template v-if="user">
-  <van-cell title="昵称" is-link @click="doEdit('username','昵称',user.username)" :value="user.username" />
-  <van-cell title="账号" is-link :value="user.userAccount" />
-  <van-cell title="头像" is-link @click="doEdit('avatarUrl','用户头像',user.avatarUrl)">
-    <img style="height: 48px" :src="user.avatarUrl"  alt="用户头像"/>
-  </van-cell>
-  <van-cell title="性别" is-link @click="doEdit('gender','性别',user.gender)" :value="user.gender" />
-  <van-cell title="电话" is-link @click="doEdit('phone','电话',user.phone)" :value="user.phone" />
-  <van-cell title="邮箱" is-link @click="doEdit('email','邮箱',user.email)" :value="user.email" />
-  <van-cell title="用户创建时间" is-link :value="new Date(user.createTime).toLocaleDateString()" />
-  <van-cell title="用户权限" is-link :value="user.userRole" />
-  <van-cell title="星球编号" is-link :value="user.planetCode" />
-  <van-cell title="标签" is-link to="/SearchPage"/>
+    <van-cell title="当前用户" :value="user?.username" />
+    <van-cell title="修改信息" is-link to="/UserPage/UserUpdatePage" />
+    <van-cell title="我创建的队伍" is-link to="/UserPage/TeamPage/UserTeamCreatePage" />
+    <van-cell title="我加入的队伍" is-link to="/UserPage/TeamPage/UserTeamJoinPage" />
   </template>
 </template>
 
