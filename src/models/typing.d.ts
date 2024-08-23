@@ -20,7 +20,7 @@ declare namespace API{
 
         userRole: number;
 
-        tags: string[];
+        tags: string;
 
         profile: string;
 
@@ -40,5 +40,6 @@ declare namespace API{
       updateTime: Date;
       userId: number;
       createUser?: CurrentUser;
+      hasJoin: boolean;
    }
 }

@@ -14,17 +14,17 @@ import UserTeamCreatePage from "../pages/UserTeamCreatePage.vue";
 
 const routes = [
     { path: '/', component: Index },
-    { path: '/TeamPage', component: TeamPage },
-    {path: '/TeamPage/TeamAddPage',component: TeamAddPage},
-    {path: '/TeamPage/TeamUpdatePage',component: TeamUpdatePage},
-    {path:'/SearchPage',component: SearchPage},
-    {path:'/UserPage',component: UserPage},
-    {path: '/UserPage/EditUserPage',component: EditUserPage},
-    {path: '/UserPage/SearchResultPage',component: SearchResultPage},
-    {path: '/UserPage/UserLoginPage',component: UserLoginPage},
-    {path: '/UserPage/UserUpdatePage',component: UserUpdatePage},
-    {path: '/UserPage/TeamPage/UserTeamJoinPage',component: UserTeamJoinPage},
-    {path: '/UserPage/TeamPage/UserTeamCreatePage',component: UserTeamCreatePage},
+    { path: '/TeamPage',title:'找队伍', component: TeamPage },
+    {path: '/TeamPage/TeamAddPage',title:'创建队伍',component: TeamAddPage},
+    {path: '/TeamPage/TeamUpdatePage',title:'更新队伍',component: TeamUpdatePage},
+    {path:'/SearchPage',title:'找伙伴',component: SearchPage},
+    {path:'/UserPage',title:'个人信息',component: UserPage},
+    {path: '/UserPage/EditUserPage',title:'编辑个人信息',component: EditUserPage},
+    {path: '/UserPage/SearchResultPage',title:'搜索结果页',component: SearchResultPage},
+    {path: '/UserPage/UserLoginPage',title:'用户登录',component: UserLoginPage},
+    {path: '/UserPage/UserUpdatePage',title:'更新个人信息',component: UserUpdatePage},
+    {path: '/UserPage/TeamPage/UserTeamJoinPage',title:'我加入的队伍',component: UserTeamJoinPage},
+    {path: '/UserPage/TeamPage/UserTeamCreatePage',title:'我创建的队伍',component: UserTeamCreatePage},
 
 
 ]

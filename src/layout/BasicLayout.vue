@@ -1,6 +1,35 @@
+<script setup>
+import {ref} from "vue";
+import { showToast } from 'vant';
+import {useRouter} from "vue-router";
+import routes from "../config/routes.ts";
+const router=useRouter();
+const onClickLeft = () => {
+  // 点击箭头返回时，跳转到上一个页面，因为有多级页面
+  router.back()
+};
+const onClickRight = () => {
+  router.push('/SearchPage')
+};
+// const active = ref("index");
+const onChange = (index) => showToast(`标签 ${index}`);
+
+//根据路由切换标题
+const DEFAULT_TITLE = '伙伴匹配';
+const title =ref(DEFAULT_TITLE);
+router.beforeEach((to,from)=>{
+  const toPath = to.path;
+  //在路由里寻找和要前往页面路径一样的配置，如果route的值不为空，则用title，如果是空，用默认的标题
+  const route = routes.find((route)=>{
+    return toPath === route.path;
+  })
+  title.value = route.title ?? DEFAULT_TITLE;
+})
+</script>
+
 <template>
   <van-nav-bar
-      title="标题"
+      :title="title"
       left-text="返回"
       right-text="按钮"
       left-arrow
@@ -33,22 +62,6 @@
   </van-tabbar>
 
 </template>
-
-<script setup>
- import {ref} from "vue";
- import { showToast } from 'vant';
- import {useRouter} from "vue-router";
- const router=useRouter();
- const onClickLeft = () => {
-   // 点击箭头返回时，跳转到上一个页面，因为有多级页面
-   router.back()
- };
- const onClickRight = () => {
-   router.push('/SearchPage')
- };
- // const active = ref("index");
- const onChange = (index) => showToast(`标签 ${index}`);
-</script>
 
 <style scoped>
 
