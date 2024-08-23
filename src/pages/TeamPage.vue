@@ -3,7 +3,7 @@ import {useRouter} from "vue-router";
 import TeamCardList from "../components/teamCardList.vue"
 import {onMounted, ref} from "vue";
 import myAxios from "../plugins/myAxios.ts";
-import {showFailToast, showToast} from "vant";
+import {showFailToast} from "vant";
 const router = useRouter();
 const searchText = ref([]);
 //跳转到加入队伍页面
