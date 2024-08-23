@@ -41,5 +41,6 @@ declare namespace API{
       userId: number;
       createUser?: CurrentUser;
       hasJoin: boolean;
+      hasJoinNum?: number;
    }
 }

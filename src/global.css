@@ -1,0 +1,14 @@
+.add-button {
+    position: fixed;
+    bottom: 60px;
+    width: 50px;
+    right: 12px;
+    height: 50px;
+    border-radius: 50%;
+    z-index: 1000;
+}
+
+.card-component {
+    padding: 16px; /* 调整内边距 */
+    margin-bottom: 30px; /* 确保下方有足够的空间 */
+}

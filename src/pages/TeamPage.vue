@@ -16,13 +16,15 @@ const teamList = ref([]);
 /**
  * 搜索队伍
  * @param val
+ * @param status
  * @returns {Promise<void>}
  */
-const listTeam = async (val = ' ') => {
+const listTeam = async (val = ' ',status = 0) => {
   const res = await myAxios.get("/team/list", {
     params: {
       searchText: val,
-      pageNum: 1
+      pageNum: 1,
+      status
     }
   });
   if (res.code === 0) {
@@ -38,13 +40,31 @@ onMounted(() => {
 const onSearch = (val) => {
   listTeam(val);
 }
+
+/**
+ * 根据队伍状态切换队伍页面
+ * @param name
+ */
+const active = ref('public')
+const onTableChange = (name) =>{
+  //查询公开队伍
+  if(name === 'public'){
+    listTeam(searchText.value,0);
+  }else{//查加密队伍
+    listTeam(searchText.value,2);
+  }
+}
 </script>
 
 <template>
   <div id="teamPage">
     <van-search v-model="searchText" placeholder="搜索队伍" @search="onSearch"/>
-    <van-button type="primary" @click="doAddTeam()">创建队伍</van-button>
-    <team-card-list :team-list="teamList" />
+    <van-tabs v-model:active="active" @change="onTableChange">
+      <van-tab title="公开" name="public" />
+      <van-tab title="加密" name="secret" />
+    </van-tabs>
+    <van-button class="add-button" type="primary" icon="plus" @click="doAddTeam()" />
+    <team-card-list class="card-component" :team-list="teamList" />
     <van-empty v-if="teamList?.length < 1" description="数据为空"/>
   </div>
 </template>

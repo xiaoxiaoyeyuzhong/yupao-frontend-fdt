@@ -8,7 +8,8 @@ import 'vant/es/toast/style';
 
 
 import routes from './config/routes.ts';
-import {createRouter, createWebHashHistory} from "vue-router";
+import {createRouter, createWebHistory} from "vue-router";
+import './global.css'
 const app=createApp(App);
 
 const router = createRouter({
@@ -16,8 +17,10 @@ const router = createRouter({
        不是根据url来变化页面的，使用History API管理路由状态，所以浏览器上看不到地址变化
      */
     // history: createMemoryHistory(),
-    history: createWebHashHistory(),
+    // history: createWebHashHistory(),
+    history: createWebHistory(),
     routes,
+
 })
 // app.use(Button);
 // app.use(NavBar);

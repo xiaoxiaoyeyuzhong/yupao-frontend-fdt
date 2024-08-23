@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<UserCardListProps>(),{
 });
 </script>
 
-<template>
+<template class="card-component">
   <van-skeleton title avatar :row="3" :loading="props.loading" v-for="user in props.userList">
     <van-card
         :desc="user.profile"

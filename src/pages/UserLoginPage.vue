@@ -2,10 +2,12 @@
 import {ref} from "vue";
 import myAxios from "../plugins/myAxios.ts"
 import {showFailToast, showSuccessToast} from "vant";
-import {useRouter} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
+
 const userAccount = ref('');
 const userPassword = ref('');
 const router=useRouter();
+const route =useRoute();
 const onSubmit = async () => {
   const res=await myAxios.post('/user/login',{
     userAccount: userAccount.value,
@@ -14,9 +16,10 @@ const onSubmit = async () => {
   console.log("用户登录")
   if (res.code===0 && res.data){
     showSuccessToast("用户登录成功");
-    await router.replace('/');
+    //拿到地址栏上的重定向参数
+    window.location.href = <string>route.query?.redirect ?? '/';
   }else {
-    showFailToast("用户登录失败");
+    showFailToast(`${res.description}`);
   }
 };
 </script>

@@ -1,34 +1,12 @@
 <script setup lang="ts">
 import {useRoute} from "vue-router";
-import {onMounted, ref, watchEffect} from "vue";
+import {ref, watchEffect} from "vue";
 import myAxios from "../plugins/myAxios.ts"
 import { showSuccessToast, showFailToast } from 'vant';
-import qs from 'qs';
 import UserCardList from "../components/UserCardList.vue";
 const route =useRoute();
 console.log(route.query.tags)
-const {tags} = route.query;
-const mockUser={
-  id: 12345,
 
-  username: "fdt",
-
-  userAccount: "123",
-
-  avatarUrl: "https://gw.alipayobjects.com/zos/rmsportal/eeHMaZBwmTvLdIwMfBpg.png",
-
-  gender: 0,
-
-  phone: "23123123213",
-
-  email: "123123@qq.com",
-
-  tags: ["java","python"],
-
-  profile: "你好，我是tian",
-
-  planetCode: "123",
-}
 //默认不开启匹配模式
 const isMatchMode = ref<boolean>(false);
 const loading = ref();
@@ -93,7 +71,7 @@ watchEffect(() => {
   <van-cell center title="心动模式">
     <van-switch v-model="isMatchMode" />
   </van-cell>
-  <user-card-list :user-list="userList" :loading="loading"/>
+  <user-card-list class="card-component" :user-list="userList" :loading="loading"/>
 
   <van-empty v-if="!userList || userList.length<1" description="数据为空" />
 </template>
